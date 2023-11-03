@@ -31,5 +31,5 @@ jobs:
         .\nuget sources add -name github -Source https://nuget.pkg.github.com/ORGANIZATION_NAME/index.json -Username ORGANIZATION_NAME -Password ${{secrets.GH_TOKEN}}
     - name: Push generated package to GitHub registry
       run: |
-        .\nuget push .\bin\release\*.nupkg -Source github -SkipDuplicate
-        .\nuget push .\bin\release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{secrets.NUGET_KEY}} -NoSymbols 
+        .\nuget push .\bin\Release\*.nupkg -Source github -SkipDuplicate
+        .\nuget push .\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{secrets.NUGET_KEY}} -NoSymbols 
