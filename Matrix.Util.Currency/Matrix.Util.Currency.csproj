@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../build/common.props" />
+	<Import Project="../build/configureawait.props" />
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+	  <Description>从多个API获取汇率，货币</Description>
+	  <Title>货币，汇率的获取</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ICurrencyHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Polly" Version="7.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Matrix.Util\Matrix.Util.csproj" />
+  </ItemGroup>
+
+</Project>

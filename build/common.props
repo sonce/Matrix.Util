@@ -1,0 +1,25 @@
+﻿<Project>
+	<Import Project="Version.props" />
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+		<Authors>ASheng</Authors>
+		<NoWarn>$(NoWarn);CS1591;CS0436</NoWarn>
+		<PackageProjectUrl>https://github.com/sonce/Matrix.Util</PackageProjectUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/sonce/Matrix.Util</RepositoryUrl>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="LocalNuget\**" />
+		<EmbeddedResource Remove="LocalNuget\**" />
+		<None Remove="LocalNuget\**" />
+	</ItemGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<OutputPath>$(SolutionDir)LocalNuget</OutputPath>
+	</PropertyGroup>
+
+</Project>
