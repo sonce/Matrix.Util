@@ -12,11 +12,5 @@ namespace Unit.Test
         {
             Assert.Pass();
         }
-
-        [Test]
-        public void Test2()
-        {
-            Assert.Fail("ÎŞÌõ¼şÊ§°Ü");
-        }
     }
 }
