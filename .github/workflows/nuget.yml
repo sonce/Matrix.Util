@@ -1,4 +1,4 @@
-name: publish nuget
+name: NuGet Generation
 
 on: 
   push:
@@ -7,29 +7,40 @@ on:
 
 jobs:
   build:
-
-    runs-on: windows-latest
-
+    runs-on: ubuntu-18.04
+    name: Update NuGet package
     steps:
     - uses: actions/checkout@v4
- 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 3.1.x
-    - name: Install tool
-      run: dotnet tool install -g dotnetCampus.TagToVersion
+    # - name: Setup .NET Core
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: 3.1.x
+    - name: Setup .NET Core @ Latest
+        uses: actions/setup-dotnet@v1
+        with:
+          source-url: https://nuget.pkg.github.com/<organization>/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
+    # - name: Install tool
+    #   run: dotnet tool install -g dotnetCampus.TagToVersion
     - name: Build with dotnet
-      run: dotnet build --configuration Release
-    - name: Install Nuget
-      run: |
-        $sourceNugetExe = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
-        $targetNugetExe = "nuget.exe"
-        Invoke-WebRequest $sourceNugetExe -OutFile $targetNugetExe
+      # run: dotnet build --configuration Release
+      run: |  
+          cd <project>
+          dotnet pack -c Release -o out
+    # - name: Install Nuget
+    #   run: |
+    #     $sourceNugetExe = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
+    #     $targetNugetExe = "nuget.exe"
+    #     Invoke-WebRequest $sourceNugetExe -OutFile $targetNugetExe
     - name: Add private GitHub registry to NuGet
-      run: |
-        .\nuget sources add -name github -Source https://nuget.pkg.github.com/ORGANIZATION_NAME/index.json -Username ORGANIZATION_NAME -Password ${{secrets.GH_TOKEN}}
-    - name: Push generated package to GitHub registry
-      run: |
-        .\nuget push .\bin\Release\*.nupkg -Source github -SkipDuplicate
-        .\nuget push .\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{secrets.NUGET_KEY}} -NoSymbols 
+      # run: |
+      #   .\nuget sources add -name github -Source https://nuget.pkg.github.com/ORGANIZATION_NAME/index.json -Username ORGANIZATION_NAME -Password ${{secrets.GH_TOKEN}}
+        # run: |
+        #   dotnet nuget add source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --name github --username ${{ github.repository_owner }} --password ${{ github.token }} --store-password-in-clear-text
+        #   dotnet nuget push **/*.nupkg --source github
+      run: dotnet nuget push ./<project>/out/*.nupkg --skip-duplicate --no-symbols true
+    # - name: Push generated package to GitHub registry
+      # run: |
+      #   .\nuget push .\bin\Release\*.nupkg -Source github -SkipDuplicate
+      #   .\nuget push .\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{secrets.NUGET_KEY}} -NoSymbols 
