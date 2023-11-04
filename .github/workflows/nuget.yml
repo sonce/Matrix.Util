@@ -16,11 +16,14 @@ jobs:
     #   with:
     #     dotnet-version: 3.1.x
     - name: Setup .NET Core @ Latest
-        uses: actions/setup-dotnet@v1
-        with:
-          source-url: https://nuget.pkg.github.com/<organization>/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
+      # uses: actions/setup-dotnet@v3
+      # with:
+      #   dotnet-version: 3.1.x
+      uses: actions/setup-dotnet@v1
+      with:
+        source-url: https://nuget.pkg.github.com/<organization>/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
     # - name: Install tool
     #   run: dotnet tool install -g dotnetCampus.TagToVersion
     - name: Build with dotnet
