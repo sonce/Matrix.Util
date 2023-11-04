@@ -28,9 +28,22 @@ jobs:
 
       - name: Build
         run: dotnet build --configuration Release
+
+      - name: Version and Tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Pack
         run: dotnet pack -c Release -o out  
 
       - name: Publish Package
-        run: dotnet nuget push ./<project>/out/*.nupkg --skip-duplicate --no-symbols true
+        run: dotnet nuget push out/*.nupkg --source https://nuget.pkg.github.com/NAMESPACE/index.json
+
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
