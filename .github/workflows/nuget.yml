@@ -16,17 +16,21 @@ jobs:
     steps:
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup .NET Core @ Latest
+      - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
-          source-url: https://nuget.pkg.github.com/<organization>/index.json
+          dotnet-version: 3.1.x
+          source-url: https://nuget.pkg.github.com/NAMESPACE/index.json
         env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}        
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Build
+        run: dotnet build --configuration Release
           
       - name: Build solution and generate NuGet package
-        run: |  
+        run: |
           cd <project>
           dotnet pack -c Release -o out  
 
