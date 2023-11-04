@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matrix.Util.Currency", "Mat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matrix.Util.IdHelper", "Matrix.Util.IdHelper\Matrix.Util.IdHelper.csproj", "{2936845E-0E0D-4FE2-BEF9-99F748EE9B46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit.Test", "Unit.Test\Unit.Test.csproj", "{69CB6E6C-4B5A-4472-9615-9F51399D2A3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{2936845E-0E0D-4FE2-BEF9-99F748EE9B46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2936845E-0E0D-4FE2-BEF9-99F748EE9B46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2936845E-0E0D-4FE2-BEF9-99F748EE9B46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69CB6E6C-4B5A-4472-9615-9F51399D2A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69CB6E6C-4B5A-4472-9615-9F51399D2A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69CB6E6C-4B5A-4472-9615-9F51399D2A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69CB6E6C-4B5A-4472-9615-9F51399D2A3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{829E922F-361D-421D-AEC1-307B9187C5E5} = {56B4195C-A86F-45DB-BAA5-8F974D17112D}
 		{E1681216-27AF-44E4-954B-F7AC139707C4} = {56B4195C-A86F-45DB-BAA5-8F974D17112D}
 		{2936845E-0E0D-4FE2-BEF9-99F748EE9B46} = {56B4195C-A86F-45DB-BAA5-8F974D17112D}
+		{69CB6E6C-4B5A-4472-9615-9F51399D2A3B} = {E63DB355-B283-460C-87E9-68A8E831ADCE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D0D80036-558A-4A3A-A0BE-00CED864A4DD}

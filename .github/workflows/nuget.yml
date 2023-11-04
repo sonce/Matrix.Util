@@ -3,15 +3,14 @@ name: NuGet Generation
 on:
   push:
     branches:
-      - main
-  pull_request:
-    types: [closed]
-    branches:
-      - main
+      - [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    matrix:
+      dotnet-version: [ '6.0.x' ]
+
     name: Update NuGet package
     steps:
 
@@ -21,13 +20,24 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 3.1.x
+          dotnet-version: ${{ matrix.dotnet-version }}
           source-url: https://nuget.pkg.github.com/sonce/index.json
         env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NUGET_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
 
       - name: Build
         run: dotnet build --configuration Release
+
+      - name: Test with dotnet
+        run: dotnet test --logger trx --results-directory "TestResults-${{ matrix.dotnet-version }}"
+
+      - name: Upload dotnet test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: dotnet-results-${{ matrix.dotnet-version }}
+          path: TestResults-${{ matrix.dotnet-version }}
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
 
       - name: Version and Tag
         id: tag_version
