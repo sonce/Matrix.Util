@@ -39,7 +39,7 @@ jobs:
         run: dotnet pack -c Release -o out  
 
       - name: Publish Package
-        run: dotnet nuget push ./out/*.nupkg -k ${{ secrets.GH_TOKEN }} -s https://nuget.pkg.github.com/NAMESPACE/index.json --skip-duplicate --no-symbols
+        run: dotnet nuget push ./out/*.nupkg -k ${{ secrets.GH_TOKEN }} -s https://nuget.pkg.github.com/ORGANIZATION_NAME/index.json --skip-duplicate --no-symbols
 
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
