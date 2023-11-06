@@ -46,7 +46,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
 
       - name: Prep Version String
-        run: echo ::set-env name=VERSION_NUMBER::$(echo ${{ steps.bump_version.outputs.new_tag }} | sed 's/[v]//g')
+        run: echo ::set-env name=VERSION_NUMBER::$(echo ${{ steps.tag_version.outputs.new_tag }} | sed 's/[v]//g')
           
       - name: Update project version
         uses: roryprimrose/set-vs-sdk-project-version@v1
