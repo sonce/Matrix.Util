@@ -45,6 +45,11 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           
+      - name: Update project version
+        uses: roryprimrose/set-vs-sdk-project-version@v1
+        with:
+          version: ${{ steps.tag_version.outputs.new_tag }}
+          
       - name: Pack
         run: dotnet pack -c Release -o out  
 
